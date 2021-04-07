@@ -1,0 +1,91 @@
+mutation LOGIN_USER($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    message
+    user {
+      name
+      email
+    }
+    token
+  }
+}
+
+query GET_USERS{
+    getAllUser{
+      id
+      name
+      email
+      role
+      status
+  }
+}
+
+mutation CREATE_NEW_USER(
+  $name:String!, 
+  $email:String!, 
+  $password:String!,
+  $role:String,
+	$status:String
+) {
+   createNewUser(newUser: {
+    name:$name,
+    email:$email,
+    password:$password,
+    role:$role,
+    status:$status
+  }){
+    id
+    name
+    email
+    role
+    status
+  }
+}
+
+mutation EDIT_USER(
+  $id: ID!
+  $name: String
+  $password: String
+  $role: String
+  $status: String
+) {
+  editUserById(
+    updateUser: {
+      name: $name
+      password: $password
+      role: $role
+      status: $status
+    }
+    id: $id
+  ) {
+    id
+    name
+    email
+    role
+    status
+  }
+}
+
+
+mutation DELETE_USER_BY_ID($id:ID!){
+	deleteUserById(id:$id){
+    id
+    message
+    success
+  }
+}
+
+mutation ACTIVE_USER_BY_ID($id:ID!){
+	activeUserById(id:$id){
+    id
+    message
+    success
+  }
+}
+
+mutation INACTIVE_USER_BY_ID($id:ID!){
+	inactiveUserById(id:$id){
+    id
+    message
+    success
+  }
+}
